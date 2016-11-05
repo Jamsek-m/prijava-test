@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Testna stran</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	</head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<body style="padding:50px">
+		<h1>Restricted site</h1>
+		<p>This content is visible only to the logged users.</p>
+		<p>Your name is: <a href="/profile"><%= user %></a></p>
+		<br/>
+		<p>
+			<a href="/logout">Logout</a>
+		</p>
+	</body>
+</html>
