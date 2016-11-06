@@ -11,13 +11,18 @@ var connection = mysql.createConnection({
 	database: 'learning'
 });
 
-/* GET home page. */
-router.get('/', function(req, res) {
-	if(req.session.user){
-		res.render('index', {user: req.session.user.display});
-	} else {
+
+function avtentikacija(req, res, next){
+	if(!req.session.user){
 		res.redirect('/login');
+	} else {
+		next();
 	}
+}
+
+/* GET home page. */
+router.get('/', avtentikacija,function(req, res) {
+	res.render('index', {user: req.session.user.display});
 });
 
 router.get('/login', function(req, res){
@@ -73,16 +78,12 @@ router.post('/register', function(req, res){
 	});
 });
 
-router.get('/profile', function(req, res){
-	if(req.session.user){
-		res.render('profile', {
-			display : req.session.user.display,
-			upime: req.session.user.username,
-			id: req.session.user.id
-		});	
-	} else {
-		res.redirect('/login');
-	}
+router.get('/profile',avtentikacija, function(req, res){
+	res.render('profile', {
+							display : req.session.user.display,
+							upime: req.session.user.username,
+							id: req.session.user.id
+						});	
 });
 
 router.get('/logout', function(req, res){
